@@ -22,15 +22,31 @@ export default function TaskList() {
         description: 'study for JRA',
         status: 'in-progress',
         priority: 'medium',
-        dueDate: 'December 12, 2025'
-        }
+        dueDate: '12-01-2025'
+        },
     ]);
-
-
-return (
-    <div>
-        <h1>My Tasks</h1>
-    </div>
-);
+return (<div style={{ padding: '20px' }}>
+            <h1 style={{ color: '#333'}} >My Tasks</h1>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                {tasks.map((task) => (
+                    <div 
+                        key={task.id} 
+                        style={{ 
+                            border: '1px solid #ccc', 
+                            padding: '15px', 
+                            borderRadius: '8px',
+                            backgroundColor: '#f9f9f9'
+                        }}
+                    >
+                        <h2 style={{color: '#222', marginTop: 0}} >{task.title}</h2>
+                        <p><strong>Description:</strong> {task.description}</p>
+                        <p><strong>Status:</strong> {task.status}</p>
+                        <p><strong>Priority:</strong> {task.priority}</p>
+                        <p><strong>Due Date:</strong> {task.dueDate}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+        );
 } 
 
