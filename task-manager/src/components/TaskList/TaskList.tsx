@@ -27,6 +27,23 @@ export default function TaskList() {
         priority: 'medium',
         dueDate: '12-01-2025'
         },
+        {
+        id: 'A86',
+        title: 'Replace the brakes',
+        description: 'Buy brakes and brake pads',
+        status: 'pending',
+        priority: 'high',
+        dueDate: '12-16-2025'
+        },
+        {
+        id: 'B2K',
+        title: 'Workout',
+        description: 'Go to the gym for leg day',
+        status: 'completed',
+        priority: 'low',
+        dueDate: '12-10-2025'
+        },
+
     ]);
     const [filters, setFilters] = useState<{status?: TaskStatus; priority?: 'low' | 'medium' | 'high';}>({});
     const handleFilterChange = (newFilters:{status?: TaskStatus; priority?: 'low' | 'medium' | 'high';}) => {

@@ -17,6 +17,7 @@ export default function TaskItem({task, onStatusChange, onDelete}: TaskItemProps
             <p><strong>Priority:</strong> {task.priority}</p>
             
             <p><strong>Due Date:</strong> {task.dueDate}</p>
+            <button onClick={() => onDelete(task.id)}>Delete Task</button>
         </div>
     );
 }
