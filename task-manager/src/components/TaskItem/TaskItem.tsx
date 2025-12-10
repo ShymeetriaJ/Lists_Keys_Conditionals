@@ -5,18 +5,18 @@ export interface TaskItemProps {
   onStatusChange: (taskId: string, newStatus: TaskStatus) => void;
   onDelete: (taskId: string) => void;
 }
-export default function TaskItem({Task, onStatusChange, onDelete}: TaskItemProps) {
+export default function TaskItem({task, onStatusChange, onDelete}: TaskItemProps) {
     return (
         <div>
-            <h2>{Task.title}</h2>
+            <h2>{task.title}</h2>
             
-            <p><strong>Description:</strong> {Task.description}</p>
+            <p><strong>Description:</strong> {task.description}</p>
             
-            <p><strong>Status:</strong> {Task.status}</p>
+            <p><strong>Status:</strong> {task.status}</p>
             
-            <p><strong>Priority:</strong> {Task.priority}</p>
+            <p><strong>Priority:</strong> {task.priority}</p>
             
-            <p><strong>Due Date:</strong> {Task.dueDate}</p>
+            <p><strong>Due Date:</strong> {task.dueDate}</p>
         </div>
     );
 }
