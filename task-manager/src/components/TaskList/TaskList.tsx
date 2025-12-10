@@ -1,5 +1,7 @@
-
+import TaskFilter from "../TaskFilter/TaskFilter";
+import TaskItem from "../TaskItem/TaskItem";
 import { useState} from "react";
+
 export type TaskStatus = 'pending' | 'in-progress' | 'completed';
  
 export interface Task {
@@ -26,28 +28,35 @@ export default function TaskList() {
         dueDate: '12-01-2025'
         },
     ]);
-return (<div style={{ padding: '20px' }}>
-            <h1 style={{ color: '#333'}} >My Tasks</h1>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                {tasks.map((task) => (
-                    <div 
-                        key={task.id} 
-                        style={{ 
-                            border: '1px solid #ccc', 
-                            padding: '15px', 
-                            borderRadius: '8px',
-                            backgroundColor: '#f9f9f9'
-                        }}
-                    >
-                        <h2 style={{color: '#222', marginTop: 0}} >{task.title}</h2>
-                        <p><strong>Description:</strong> {task.description}</p>
-                        <p><strong>Status:</strong> {task.status}</p>
-                        <p><strong>Priority:</strong> {task.priority}</p>
-                        <p><strong>Due Date:</strong> {task.dueDate}</p>
-                    </div>
-                ))}
-            </div>
+    const [filters, setFilters] = useState<{status?: TaskStatus; priority?: 'low' | 'medium' | 'high';}>({});
+    const handleFilterChange = (newFilters:{status?: TaskStatus; priority?: 'low' | 'medium' | 'high';}) => {
+        setFilters(newFilters);
+    };
+    const filteredTasks = tasks.filter (task => {
+        const matchesStatus = filters.status ? task.status === filters.status : true;
+        const matchesPriority = filters.priority ? task.priority === filters.priority : true;
+        return matchesStatus && matchesPriority;
+    });
+    const handleStatusChange = (taskId: string, newStatus: TaskStatus) => {console.log(`Change task ${taskId} to ${newStatus}`);
+    };
+    const handleDelete = (taskId: string) => {console.log(`Deleting task ${taskId}`);
+    };   
+return (
+    <div>
+        <h1>My Tasks</h1>
+        
+        <TaskFilter onFilterChange={handleFilterChange} />
+        
+        <div>
+            {filteredTasks.map((task) => (
+                <TaskItem
+                    key={task.id}
+                    task={task}
+                    onStatusChange={handleStatusChange}
+                    onDelete={handleDelete}
+                />
+            ))}
         </div>
-        );
-} 
-
+    </div>
+);
+}
